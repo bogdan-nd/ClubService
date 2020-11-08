@@ -2,6 +2,7 @@ package com.services.club.service;
 
 import com.services.club.entity.Club;
 import com.services.club.repo.ClubRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,12 @@ public class ClubService {
     }
 
     @Transactional
-    public Club saveClub(Club club){
+    public Club saveClub(int moneyAmount) throws NotFoundException {
+        Club club = getAccount();
+        if(club == null)
+            throw new NotFoundException("No Club account");
+
+        club.setMoneyAmount(moneyAmount);
         return repository.save(club);
     }
 }

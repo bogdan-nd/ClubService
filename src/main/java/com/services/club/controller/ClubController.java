@@ -3,6 +3,7 @@ package com.services.club.controller;
 import com.services.club.dto.ClubDTO;
 import com.services.club.entity.Club;
 import com.services.club.service.ClubService;
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +39,17 @@ public class ClubController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity<Club> updateClub(@RequestBody Club club){
-        return ResponseEntity.ok(clubAccountService.saveClub(club));
+    @PatchMapping("{moneyAmount}")
+    public ResponseEntity<?> updateClub(@PathVariable int moneyAmount){
+        try {
+            clubAccountService.saveClub(moneyAmount);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("Changed the money amount of club.");
+
+        }
+        catch (NotFoundException exception) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(exception.getMessage());
+        }
     }
 }
