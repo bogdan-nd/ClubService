@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  clubservice:
+    network_mode: bridge
+    container_name: clubservice
+    image: bogdannaida/club-service:latest
+    build: ./
+    ports:
+      - "8085:8085"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=clubservice
+      - DB_SERVER=postgresqldb-club
+    links:
+      - postgresqldb-club
+
+  postgresqldb-club:
+    network_mode: bridge
+    image: postgres
+    ports:
+      - "5436:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=clubservice
+    volumes:
+      - postgres-data-club:/home/bogdannaida/Projects/IntelliJ-projects/Volumes/
+volumes:
+  postgres-data-club:
