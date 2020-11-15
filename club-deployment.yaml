@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: clubservice
+  name: clubservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: clubservice
+  strategy: { }
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: clubservice
+    spec:
+      containers:
+        - env:
+            - name: DB_SERVER
+              value: postgresqldb-club
+            - name: POSTGRES_DB
+              value: clubservice
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: POSTGRES_USER
+              value: postgres
+          image: bogdannaida/club-service:latest
+          imagePullPolicy: ""
+          name: club-service
+          ports:
+            - containerPort: 8082
+          resources: { }
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: postgres-data-club
+          persistentVolumeClaim:
+            claimName: postgres-data-club
+status: { }
