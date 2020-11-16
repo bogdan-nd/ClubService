@@ -39,8 +39,20 @@ public class ClubController {
         }
     }
 
+    @PatchMapping("spend/{moneyAmount)")
+    public ResponseEntity<String> spendMoney(@PathVariable int moneyAmount){
+        clubAccountService.spendMoney(moneyAmount);
+        return ResponseEntity.ok("Club spent money");
+    }
+
+    @PatchMapping("earn/{moneyAmount)")
+    public ResponseEntity<String> earnMoney(@PathVariable int moneyAmount){
+        clubAccountService.earnMoney(moneyAmount);
+        return ResponseEntity.ok("Club earned money");
+    }
+
     @PatchMapping("{moneyAmount}")
-    public ResponseEntity<?> updateClub(@PathVariable int moneyAmount){
+    public ResponseEntity<String> updateClub(@PathVariable int moneyAmount){
         try {
             clubAccountService.saveClub(moneyAmount);
             return ResponseEntity.status(HttpStatus.OK)

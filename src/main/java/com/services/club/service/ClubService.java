@@ -42,6 +42,22 @@ public class ClubService {
     }
 
     @Transactional
+    public Club spendMoney(int moneyAmount){
+        Club club = getAccount();
+        club.spendMoney(moneyAmount);
+        saveClubAccount(club);
+        return club;
+    }
+
+    @Transactional
+    public Club earnMoney(int moneyAmount){
+        Club club = getAccount();
+        club.earnMoney(moneyAmount);
+        saveClubAccount(club);
+        return club;
+    }
+
+    @Transactional
     public Club saveClub(int moneyAmount) throws NotFoundException {
         Club club = getAccount();
         if(club == null)
