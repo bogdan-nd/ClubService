@@ -6,7 +6,7 @@ services:
     image: bogdannaida/club-service:latest
     build: ./
     ports:
-      - "8085:8085"
+      - "8082:8082"
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
