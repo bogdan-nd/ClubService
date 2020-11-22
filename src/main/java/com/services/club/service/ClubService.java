@@ -29,41 +29,29 @@ public class ClubService {
         List<Club> clubs = repository.findAll();
         if (clubs.size() != 0)
             throw new InstanceAlreadyExistsException("Club Account already exist");
-        return repository.save(clubAccount);
+        return saveClubAccount(clubAccount);
 
     }
 
     @Transactional
-    public Club getAccount(){
+    public Club getAccount() throws NotFoundException{
         List<Club> clubs = repository.findAll();
         if (clubs.size() == 0)
-            return null;
+            throw new NotFoundException("CLub does not exist");
         return clubs.get(0);
     }
 
     @Transactional
-    public Club spendMoney(int moneyAmount){
+    public void spendMoney(int moneyAmount) throws NotFoundException{
         Club club = getAccount();
         club.spendMoney(moneyAmount);
         saveClubAccount(club);
-        return club;
     }
 
     @Transactional
-    public Club earnMoney(int moneyAmount){
+    public void earnMoney(int moneyAmount) throws NotFoundException{
         Club club = getAccount();
         club.earnMoney(moneyAmount);
         saveClubAccount(club);
-        return club;
-    }
-
-    @Transactional
-    public Club saveClub(int moneyAmount) throws NotFoundException {
-        Club club = getAccount();
-        if(club == null)
-            throw new NotFoundException("No Club account");
-
-        club.setMoneyAmount(moneyAmount);
-        return repository.save(club);
     }
 }
