@@ -21,17 +21,17 @@ message CreateClubRequest{
   int32 seedCapital = 1;
 }
 
-message MoneyRequest{
+message ClubMoneyRequest{
   int32 moneyAmount = 1;
 }
 
-message StringResponse{
+message ClubStringResponse{
   string text =1;
 }
 
 service ClubService{
   rpc getClub(ClubEmpty) returns (ClubResponse);
   rpc addClub(CreateClubRequest) returns (ClubResponse);
-  rpc spendMoney(MoneyRequest) returns (StringResponse);
-  rpc earnMoney(MoneyRequest) returns (StringResponse);
+  rpc spendMoney(ClubMoneyRequest) returns (ClubStringResponse);
+  rpc earnMoney(ClubMoneyRequest) returns (ClubStringResponse);
 }

@@ -51,11 +51,11 @@ public class ClubGrpcController extends ClubServiceGrpc.ClubServiceImplBase {
     }
 
     @Override
-    public void spendMoney(MoneyRequest request, StreamObserver<StringResponse> responseObserver) {
+    public void spendMoney(ClubMoneyRequest request, StreamObserver<ClubStringResponse> responseObserver) {
         int moneyAmount = request.getMoneyAmount();
         try {
             clubService.spendMoney(moneyAmount);
-            StringResponse response = StringResponse.newBuilder()
+            ClubStringResponse response = ClubStringResponse.newBuilder()
                     .setText(String.format("Club spent %s $",moneyAmount)).build();
 
             responseObserver.onNext(response);
@@ -67,11 +67,11 @@ public class ClubGrpcController extends ClubServiceGrpc.ClubServiceImplBase {
     }
 
     @Override
-    public void earnMoney(MoneyRequest request, StreamObserver<StringResponse> responseObserver) {
+    public void earnMoney(ClubMoneyRequest request, StreamObserver<ClubStringResponse> responseObserver) {
         int moneyAmount = request.getMoneyAmount();
         try {
             clubService.earnMoney(moneyAmount);
-            StringResponse response = StringResponse.newBuilder()
+            ClubStringResponse response = ClubStringResponse.newBuilder()
                     .setText(String.format("Club earned %s $",moneyAmount)).build();
 
             responseObserver.onNext(response);
