@@ -1,4 +1,4 @@
-package com.services.club.controller;
+package com.services.club.controller.rest;
 
 import com.services.club.dto.ClubDTO;
 import com.services.club.entity.Club;
