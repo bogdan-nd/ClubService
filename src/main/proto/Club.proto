@@ -9,7 +9,7 @@ message ProtoClub{
   int32 seedCapital = 3;
 }
 
-message Empty{
+message ClubEmpty{
 
 }
 
@@ -30,7 +30,7 @@ message StringResponse{
 }
 
 service ClubService{
-  rpc getClub(Empty) returns (ClubResponse);
+  rpc getClub(ClubEmpty) returns (ClubResponse);
   rpc addClub(CreateClubRequest) returns (ClubResponse);
   rpc spendMoney(MoneyRequest) returns (StringResponse);
   rpc earnMoney(MoneyRequest) returns (StringResponse);

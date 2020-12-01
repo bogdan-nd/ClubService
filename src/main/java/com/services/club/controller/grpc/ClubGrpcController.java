@@ -18,7 +18,7 @@ public class ClubGrpcController extends ClubServiceGrpc.ClubServiceImplBase {
     private final ClubService clubService;
 
     @Override
-    public void getClub(Empty request, StreamObserver<ClubResponse> responseObserver) {
+    public void getClub(ClubEmpty request, StreamObserver<ClubResponse> responseObserver) {
         try {
             Club club = clubService.getAccount();
             ProtoClub protoClub = clubToProto(club);
