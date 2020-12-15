@@ -1,6 +1,6 @@
 package com.services.club.controller.rest;
 
-import com.services.club.dto.ClubDTO;
+import com.services.club.controller.rest.dto.ClubDTO;
 import com.services.club.entity.Club;
 import com.services.club.service.ClubService;
 import javassist.NotFoundException;

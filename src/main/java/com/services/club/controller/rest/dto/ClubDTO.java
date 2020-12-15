@@ -1,4 +1,4 @@
-package com.services.club.dto;
+package com.services.club.controller.rest.dto;
 
 import lombok.Data;
 
